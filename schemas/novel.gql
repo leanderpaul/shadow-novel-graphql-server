@@ -1,0 +1,112 @@
+type Query {
+  novels(filter: NovelFilter = {}, limit: Int = 20, offset: Int = 0, sort: NovelSort): NovelPagination
+  novel(nid: ID!): Novel
+}
+
+type Mutation {
+  createNovel(novel: NovelInput!): NovelOrError @iam(requires: USER)
+  createVolume(nid: ID!, volume: VolumeInput = {}): NovelOrError @iam(requires: NOVEL_ADMIN)
+  createChapter(nid: ID!, vid: ID!, chapter: ChapterInput!): ChapterOrError @iam(requires: NOVEL_ADMIN)
+  updateNovel(nid: ID!, update: NovelInput!): NovelOrError @iam(requires: NOVEL_ADMIN)
+  updateVolume(nid: ID!, vid: ID!, name: String): NovelOrError @iam(requires: NOVEL_ADMIN)
+  updateChapter(nid: ID!, cid: ID!, update: ChapterInput!): ChapterOrError @iam(requires: NOVEL_ADMIN)
+  deleteNovel(nid: ID!): Operation @iam(requires: NOVEL_ADMIN)
+  deleteVolume(nid: ID!, vid: ID!): NovelOrError @iam(requires: NOVEL_ADMIN)
+  deleteChapter(nid: ID!, cid: ID!): NovelOrError @iam(requires: NOVEL_ADMIN)
+}
+
+type NovelPagination {
+  entries: [Novel!]!
+  limit: Int!
+  offset: Int!
+  totalCount: Int!
+}
+
+type ChapterPagination {
+  entries: [Chapter!]!
+  offset: Int!
+  limit: Int
+  totalCount: Int!
+}
+
+type Novel {
+  nid: ID!
+  cover: String
+  title: String!
+  author: String!
+  desc: String!
+  status: StatusEnum!
+  genre: GenreEnum!
+  tags: [TagEnum!]!
+  views: Int!
+  volumes: [Volume!]!
+  createdAt: Date!
+  chapter(cid: ID!): Chapter
+  chapters(offset: Int = 0, limit: Int, sortDirection: SortDirection): ChapterPagination
+}
+
+type Volume {
+  vid: String!
+  name: String
+  desc: String
+  chapters(offset: Int = 0, limit: Int, sortDirection: SortDirection): ChapterPagination
+}
+
+type Chapter {
+  cid: ID!
+  nid: ID!
+  vid: ID!
+  index: Int!
+  title: String!
+  content: String!
+  matureContent: Boolean!
+  createdAt: Date!
+}
+
+union NovelOrError = Novel | Error
+
+union ChapterOrError = Chapter | Error
+
+input NovelFilter {
+  title: String
+  author: String
+  status: StatusEnum
+  genre: GenreEnum
+}
+
+input NovelSort {
+  field: NovelSortBy!
+  order: SortDirection!
+}
+
+input NovelInput {
+  cover: String
+  title: String!
+  desc: String!
+  status: StatusEnum!
+  genre: GenreEnum!
+  tags: [TagEnum!]!
+}
+
+input ChapterInput {
+  title: String!
+  content: String!
+  matureContent: Boolean!
+}
+
+input VolumeInput {
+  name: String
+  desc: String
+}
+
+enum NovelSortBy {
+  TITLE
+  VIEWS
+  CREATED_AT
+  CHAPTER_COUNT
+}
+
+enum StatusEnum {
+  COMPLETED
+  ONGOING
+}

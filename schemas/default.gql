@@ -1,0 +1,23 @@
+directive @iam(requires: Role) on FIELD_DEFINITION
+
+enum Role {
+  USER
+  NOVEL_ADMIN
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+type Operation {
+  status: Boolean!
+  msg: String!
+}
+
+type Error {
+  message: String
+  code: String
+}
+
+scalar Date

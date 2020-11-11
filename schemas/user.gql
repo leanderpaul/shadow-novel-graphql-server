@@ -1,0 +1,18 @@
+type Query {
+  user: User @iam(requires: USER)
+}
+
+type Mutation {
+  login(username: String!, password: String!): UserOrError
+  register(username: String!, password: String!): UserOrError
+  verifyUser(token: String!): UserOrError
+}
+
+union UserOrError = User | Error
+
+type User {
+  uid: ID!
+  username: String!
+  token: String!
+  novels(title: String = "", limit: Int = 20, offset: Int = 0, sort: NovelSort = { field: "TITLE", order: "ASC" }): NovelPagination!
+}

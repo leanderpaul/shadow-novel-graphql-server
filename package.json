@@ -1,0 +1,58 @@
+{
+  "name": "shadow-novel-graphql-server",
+  "version": "1.0.0",
+  "description": "A Shadow Novel Graphql Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "ts-node index",
+    "server:watch": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leanderpaul/shadow-novel-graphql-server.git"
+  },
+  "keywords": [
+    "ShadowNovel",
+    "shadow-novel",
+    "shadow",
+    "novel"
+  ],
+  "author": "Shadow Lord",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leanderpaul/shadow-novel-graphql-server/issues"
+  },
+  "homepage": "https://github.com/leanderpaul/shadow-novel-graphql-server#readme",
+  "dependencies": {
+    "apollo-server": "^2.19.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.4.0",
+    "graphql-tools": "^7.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.13",
+    "uniqid": "^5.2.0",
+    "validator": "^13.1.17"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/debug": "^4.1.5",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/mongoose": "^5.10.0",
+    "@types/uniqid": "^5.2.0",
+    "@types/validator": "^13.1.0",
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.5"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      ".git",
+      "node_modules",
+      "dist"
+    ],
+    "exec": "npm run server",
+    "ext": "ts"
+  }
+}

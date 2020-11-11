@@ -1,0 +1,27 @@
+overwrite: true
+schema:
+  - './schemas/index.schemas.ts':
+    noRequire: true
+documents: null
+generates:
+  ./typescript/graphql.types.ts:
+    config:
+      contextType: ./server.types#Context
+      useIndexSignature: true
+      enumsAsConst: true
+      enumValues:
+        SortDirection:
+          ASC: 1
+          DESC: -1
+      customResolverFn: |
+        (
+          parent: TParent,
+          args: TArgs,
+          context: TContext,
+          info: GraphQLResolveInfo
+        ) => Promise<Partial<TResult>> | Partial<TResult>;
+    plugins:
+      - 'typescript'
+      - 'typescript-resolvers'
+require:
+  - ts-node/register

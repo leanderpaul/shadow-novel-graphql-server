@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "gen-gql-types": "graphql-codegen --config codegen.yml",
     "server": "ts-node index",
     "server:watch": "nodemon ."
   },
@@ -36,6 +37,10 @@
     "validator": "^13.1.17"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.19.1",
+    "@graphql-codegen/introspection": "1.18.0",
+    "@graphql-codegen/typescript": "1.17.11",
+    "@graphql-codegen/typescript-resolvers": "1.17.10",
     "@types/bcryptjs": "^2.4.2",
     "@types/debug": "^4.1.5",
     "@types/jsonwebtoken": "^8.5.0",

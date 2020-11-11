@@ -1,14 +1,14 @@
+import { genres } from '../data/index';
+import GenreEnum = genres;
+import { tags } from '../data/index';
+import TagEnum = tags;
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { Context } from './server.types';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type ResolverFn<TResult, TParent, TContext, TArgs> = (
-  parent: TParent,
-  args: TArgs,
-  context: TContext,
-  info: GraphQLResolveInfo
-) => Promise<Partial<TResult>> | Partial<TResult>;
+export type ResolverFn<TResult, TParent, TContext, TArgs> = (parent: TParent, args: TArgs, context: TContext, info: GraphQLResolveInfo) => Promise<Partial<TResult>> | Partial<TResult>;
 
+export type EnumResolverSignature<T, AllowedValues = any> = { [key in keyof T]?: AllowedValues };
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -19,7 +19,6 @@ export type Scalars = {
   Float: number;
   Date: any;
 };
-
 
 export const Role = {
   User: 'USER',
@@ -45,59 +44,10 @@ export type Error = {
   code?: Maybe<Scalars['String']>;
 };
 
+export { GenreEnum };
 
-export const GenreEnum = {
-  ContemporaryRomance: 'CONTEMPORARY_ROMANCE',
-  Fantasy: 'FANTASY',
-  FantasyRomance: 'FANTASY_ROMANCE',
-  MagicalRealism: 'MAGICAL_REALISM',
-  SciFi: 'SCI_FI',
-  Xianxia: 'XIANXIA'
-} as const;
+export { TagEnum };
 
-export type GenreEnum = typeof GenreEnum[keyof typeof GenreEnum];
-export const TagEnum = {
-  Action: 'ACTION',
-  Adult: 'ADULT',
-  Adventure: 'ADVENTURE',
-  Comedy: 'COMEDY',
-  Drama: 'DRAMA',
-  Ecchi: 'ECCHI',
-  Fantasy: 'FANTASY',
-  FemaleProtagonist: 'FEMALE_PROTAGONIST',
-  GenderBender: 'GENDER_BENDER',
-  Harem: 'HAREM',
-  Historical: 'HISTORICAL',
-  Horror: 'HORROR',
-  Josei: 'JOSEI',
-  MaleProtagonist: 'MALE_PROTAGONIST',
-  MartialArts: 'MARTIAL_ARTS',
-  Mature: 'MATURE',
-  Mecha: 'MECHA',
-  Mystery: 'MYSTERY',
-  Psychological: 'PSYCHOLOGICAL',
-  Romance: 'ROMANCE',
-  R_18: 'R_18',
-  SchoolLife: 'SCHOOL_LIFE',
-  SciFi: 'SCI_FI',
-  Seinen: 'SEINEN',
-  Shoujo: 'SHOUJO',
-  ShoujoAi: 'SHOUJO_AI',
-  Shounen: 'SHOUNEN',
-  ShounenAi: 'SHOUNEN_AI',
-  SliceOfLife: 'SLICE_OF_LIFE',
-  Smut: 'SMUT',
-  Sports: 'SPORTS',
-  Supernatural: 'SUPERNATURAL',
-  Tragedy: 'TRAGEDY',
-  Wuxia: 'WUXIA',
-  Xianxia: 'XIANXIA',
-  Xuanhuan: 'XUANHUAN',
-  Yaoi: 'YAOI',
-  Yuri: 'YURI'
-} as const;
-
-export type TagEnum = typeof TagEnum[keyof typeof TagEnum];
 export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
@@ -105,14 +55,12 @@ export type Query = {
   novel?: Maybe<Novel>;
 };
 
-
 export type QueryNovelsArgs = {
   filter?: Maybe<NovelFilter>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   sort?: Maybe<NovelSort>;
 };
-
 
 export type QueryNovelArgs = {
   nid: Scalars['ID'];
@@ -134,34 +82,28 @@ export type Mutation = {
   deleteChapter?: Maybe<NovelOrError>;
 };
 
-
 export type MutationLoginArgs = {
   username: Scalars['String'];
   password: Scalars['String'];
 };
-
 
 export type MutationRegisterArgs = {
   username: Scalars['String'];
   password: Scalars['String'];
 };
 
-
 export type MutationVerifyUserArgs = {
   token: Scalars['String'];
 };
-
 
 export type MutationCreateNovelArgs = {
   novel: NovelInput;
 };
 
-
 export type MutationCreateVolumeArgs = {
   nid: Scalars['ID'];
   volume?: Maybe<VolumeInput>;
 };
-
 
 export type MutationCreateChapterArgs = {
   nid: Scalars['ID'];
@@ -169,12 +111,10 @@ export type MutationCreateChapterArgs = {
   chapter: ChapterInput;
 };
 
-
 export type MutationUpdateNovelArgs = {
   nid: Scalars['ID'];
   update: NovelInput;
 };
-
 
 export type MutationUpdateVolumeArgs = {
   nid: Scalars['ID'];
@@ -182,24 +122,20 @@ export type MutationUpdateVolumeArgs = {
   name?: Maybe<Scalars['String']>;
 };
 
-
 export type MutationUpdateChapterArgs = {
   nid: Scalars['ID'];
   cid: Scalars['ID'];
   update: ChapterInput;
 };
 
-
 export type MutationDeleteNovelArgs = {
   nid: Scalars['ID'];
 };
-
 
 export type MutationDeleteVolumeArgs = {
   nid: Scalars['ID'];
   vid: Scalars['ID'];
 };
-
 
 export type MutationDeleteChapterArgs = {
   nid: Scalars['ID'];
@@ -215,7 +151,6 @@ export type User = {
   token: Scalars['String'];
   novels: NovelPagination;
 };
-
 
 export type UserNovelsArgs = {
   title?: Maybe<Scalars['String']>;
@@ -257,11 +192,9 @@ export type Novel = {
   chapters?: Maybe<ChapterPagination>;
 };
 
-
 export type NovelChapterArgs = {
   cid: Scalars['ID'];
 };
-
 
 export type NovelChaptersArgs = {
   offset?: Maybe<Scalars['Int']>;
@@ -276,7 +209,6 @@ export type Volume = {
   desc?: Maybe<Scalars['String']>;
   chapters?: Maybe<ChapterPagination>;
 };
-
 
 export type VolumeChaptersArgs = {
   offset?: Maybe<Scalars['Int']>;
@@ -351,7 +283,6 @@ export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
-
 export type LegacyStitchingResolver<TResult, TParent, TContext, TArgs> = {
   fragment: string;
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
@@ -362,9 +293,7 @@ export type NewStitchingResolver<TResult, TParent, TContext, TArgs> = {
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
 export type StitchingResolver<TResult, TParent, TContext, TArgs> = LegacyStitchingResolver<TResult, TParent, TContext, TArgs> | NewStitchingResolver<TResult, TParent, TContext, TArgs>;
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
-  | ResolverFn<TResult, TParent, TContext, TArgs>
-  | StitchingResolver<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<TResult, TParent, TContext, TArgs> | StitchingResolver<TResult, TParent, TContext, TArgs>;
 
 export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
@@ -373,12 +302,7 @@ export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
   info: GraphQLResolveInfo
 ) => AsyncIterator<TResult> | Promise<AsyncIterator<TResult>>;
 
-export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
-  parent: TParent,
-  args: TArgs,
-  context: TContext,
-  info: GraphQLResolveInfo
-) => TResult | Promise<TResult>;
+export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (parent: TParent, args: TArgs, context: TContext, info: GraphQLResolveInfo) => TResult | Promise<TResult>;
 
 export interface SubscriptionSubscriberObject<TResult, TKey extends string, TParent, TContext, TArgs> {
   subscribe: SubscriptionSubscribeFn<{ [key in TKey]: TResult }, TParent, TContext, TArgs>;
@@ -398,11 +322,7 @@ export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TCo
   | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
-export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
-  parent: TParent,
-  context: TContext,
-  info: GraphQLResolveInfo
-) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
+export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (parent: TParent, context: TContext, info: GraphQLResolveInfo) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
 export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
 
@@ -425,8 +345,8 @@ export type ResolversTypes = ResolversObject<{
   String: ResolverTypeWrapper<Scalars['String']>;
   Error: ResolverTypeWrapper<Error>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
-  GenreEnum: GenreEnum;
-  TagEnum: TagEnum;
+  GenreEnum: genres;
+  TagEnum: tags;
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
@@ -476,11 +396,11 @@ export type ResolversParentTypes = ResolversObject<{
   VolumeInput: VolumeInput;
 }>;
 
-export type IamDirectiveArgs = {   requires?: Maybe<Role>; };
+export type IamDirectiveArgs = { requires?: Maybe<Role> };
 
 export type IamDirectiveResolver<Result, Parent, ContextType = Context, Args = IamDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type SortDirectionResolvers = { ASC: 1, DESC: -1 };
+export type SortDirectionResolvers = { ASC: 1; DESC: -1 };
 
 export type OperationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Operation'] = ResolversParentTypes['Operation']> = ResolversObject<{
   status?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -497,6 +417,55 @@ export type ErrorResolvers<ContextType = Context, ParentType extends ResolversPa
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
   name: 'Date';
 }
+
+export type GenreEnumResolvers = EnumResolverSignature<
+  { CONTEMPORARY_ROMANCE?: any; FANTASY?: any; FANTASY_ROMANCE?: any; MAGICAL_REALISM?: any; SCI__FI?: any; XIANXIA?: any },
+  ResolversTypes['GenreEnum']
+>;
+
+export type TagEnumResolvers = EnumResolverSignature<
+  {
+    ACTION?: any;
+    ADULT?: any;
+    ADVENTURE?: any;
+    COMEDY?: any;
+    DRAMA?: any;
+    ECCHI?: any;
+    FANTASY?: any;
+    FEMALE_PROTAGONIST?: any;
+    GENDER_BENDER?: any;
+    HAREM?: any;
+    HISTORICAL?: any;
+    HORROR?: any;
+    JOSEI?: any;
+    MALE_PROTAGONIST?: any;
+    MARTIAL_ARTS?: any;
+    MATURE?: any;
+    MECHA?: any;
+    MYSTERY?: any;
+    PSYCHOLOGICAL?: any;
+    ROMANCE?: any;
+    R__18?: any;
+    SCHOOL_LIFE?: any;
+    SCI__FI?: any;
+    SEINEN?: any;
+    SHOUJO?: any;
+    SHOUJO_AI?: any;
+    SHOUNEN?: any;
+    SHOUNEN_AI?: any;
+    SLICE_OF_LIFE?: any;
+    SMUT?: any;
+    SPORTS?: any;
+    SUPERNATURAL?: any;
+    TRAGEDY?: any;
+    WUXIA?: any;
+    XIANXIA?: any;
+    XUANHUAN?: any;
+    YAOI?: any;
+    YURI?: any;
+  },
+  ResolversTypes['TagEnum']
+>;
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
@@ -597,6 +566,8 @@ export type Resolvers<ContextType = Context> = ResolversObject<{
   Operation?: OperationResolvers<ContextType>;
   Error?: ErrorResolvers<ContextType>;
   Date?: GraphQLScalarType;
+  GenreEnum?: GenreEnumResolvers;
+  TagEnum?: TagEnumResolvers;
   Query?: QueryResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   UserOrError?: UserOrErrorResolvers<ContextType>;
@@ -610,7 +581,6 @@ export type Resolvers<ContextType = Context> = ResolversObject<{
   ChapterOrError?: ChapterOrErrorResolvers<ContextType>;
 }>;
 
-
 /**
  * @deprecated
  * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
@@ -619,7 +589,6 @@ export type IResolvers<ContextType = Context> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = Context> = ResolversObject<{
   iam?: IamDirectiveResolver<any, any, ContextType>;
 }>;
-
 
 /**
  * @deprecated

@@ -13,6 +13,8 @@ generates:
         SortDirection:
           ASC: 1
           DESC: -1
+        GenreEnum: ../data/index#genres
+        TagEnum: ../data/index#tags
       customResolverFn: |
         (
           parent: TParent,

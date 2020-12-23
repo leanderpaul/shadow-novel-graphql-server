@@ -57,4 +57,4 @@ userSchema.index({ username: 1 }, { name: `<>${errorCodes.USER_ALREADY_EXISTS}<>
 /**
  * Exporting the user model.
  */
-export default model<UserDocument>('users', userSchema);
+export default model<UserDocument>('gql-users', userSchema);

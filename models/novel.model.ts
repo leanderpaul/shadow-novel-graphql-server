@@ -117,4 +117,4 @@ novelSchema.index({ nid: 1 }, { name: `<>NID_ALREADY_EXISTS<>`, unique: true });
 /**
  * Exporting the novel model.
  */
-export default model<NovelDocument>('novels', novelSchema);
+export default model<NovelDocument>('gql-novels', novelSchema);

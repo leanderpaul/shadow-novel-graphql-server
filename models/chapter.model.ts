@@ -69,4 +69,4 @@ chapterSchema.index({ cid: 1 }, { name: '<>CID_ALREADY_EXISTS<>', unique: true }
 /**
  * Exporting the chapter model.
  */
-export default model<ChapterDocument>('chapters', chapterSchema);
+export default model<ChapterDocument>('gql-chapters', chapterSchema);
